@@ -7,7 +7,6 @@ import senMail from "./email.controller.js";
 
 
 export const save =async (req,res)=>{
-  console.log(req.body);
     // For dynamic id increment
     var userList = await UserSchemaModel.find();// find all users
     var l = userList.length;    
@@ -16,7 +15,6 @@ export const save =async (req,res)=>{
     const password = userDetails.password;
     // const hashedPassword = await bcrypt.hash(password, 10);
     // userDetails.password = hashedPassword;
-    // console.log(userDetails)
      try{
         await UserSchemaModel.create(userDetails)
         senMail(userDetails.email,userDetails.password);
