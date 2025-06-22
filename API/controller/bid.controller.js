@@ -1,6 +1,5 @@
 import '../model/connection.js';
 import url from 'url';
-
 import BidSchemaModel from '../model/bid.model.js';
 
 export var save=async (req,res)=>{
@@ -21,42 +20,11 @@ export var save=async (req,res)=>{
 
 export var fetch=async(req,res)=>{
   var condition_obj=url.parse(req.url,true).query;    
- // console.log(condition_obj);
   var bidList=await BidSchemaModel.find(condition_obj);
-  //console.log(bidList);
   if(bidList.length!=0)
     res.status(200).json(bidList);
   else
     res.status(404).json({"status":"Resource not found"});
 };
-
-/*export var update=async(req,res)=>{
-  let userDetails = await UserSchemaModel.findOne(req.body.condition_obj);
-  if(userDetails){
-      let user=await UserSchemaModel.updateOne(req.body.condition_obj,{$set: req.body.content_obj});   
-      if(user)
-        res.status(200).json({"msg":"success"});
-      else
-        res.status(500).json({"status": "Server Error"});
-  }
-  else
-    res.status(404).json({"status":"Requested resource not available"});       
-};
-
-export var deletedata=async(req,res)=>{
-  let userDetails = await UserSchemaModel.findOne(req.body);
-  if(userDetails){
-      let user=await UserSchemaModel.deleteOne(req.body);   
-      if(user)
-        res.status(200).json({"msg":"success"});
-      else
-        res.status(500).json({"status": "Server Error"});
-  }
-  else
-    res.status(404).json({"status":"Requested resource not available"});      
-   
-};
-*/
-
 
 
